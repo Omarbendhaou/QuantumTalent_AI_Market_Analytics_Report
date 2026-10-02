@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuantumTalent AI Market Analytics - Executive Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 14mm 16mm 14mm 16mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #1e293b;
+      background-color: #ffffff;
+      line-height: 1.55;
+      font-size: 9pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      page-break-after: always;
+      position: relative;
+      height: 268mm;
+      max-height: 268mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    .page-content {
+      flex: 1;
+    }
+
+    /* Cover Page */
+    .cover {
+      height: 269mm;
+      max-height: 269mm;
+      background: linear-gradient(135deg, #090d16 0%, #0f172a 45%, #1e1e38 100%);
+      color: #ffffff;
+      padding: 24mm 20mm;
+      margin: -14mm -16mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32pt;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .cover-title span {
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-subtitle {
+      font-size: 11.5pt;
+      font-weight: 400;
+      color: #94a3b8;
+      max-width: 540px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .cover-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .kpi-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18pt;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 2px;
+    }
+
+    .kpi-sub {
+      font-size: 7.5pt;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .cover-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .team-box h4 {
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .team-box p {
+      font-size: 9pt;
+      color: #e2e8f0;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .report-meta-box {
+      text-align: right;
+      font-size: 8pt;
+      color: #64748b;
+    }
+
+    .report-meta-box strong {
+      color: #e2e8f0;
+      display: block;
+      font-size: 9.5pt;
+      margin-bottom: 3px;
+    }
+
+    /* Standard Header and Footer */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+
+    .page-header-title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #0284c7;
+    }
+
+    .page-header-date {
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 6px;
+      margin-top: 10px;
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+
+    /* Headings */
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 12px;
+      background: #0284c7;
+      border-radius: 2px;
+    }
+
+    p {
+      color: #475569;
+      margin-bottom: 8px;
+      font-size: 8.8pt;
+      line-height: 1.5;
+    }
+
+    .lead-text {
+      font-size: 9.3pt;
+      color: #334155;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    /* Table of Contents & List of Figures Styling */
+    .toc-container {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .toc-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #cbd5e1;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .toc-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-size: 8.2pt;
+      transition: color 0.15s ease;
+    }
+
+    .toc-link:hover .toc-item-title,
+    .toc-link:hover .toc-item-page {
+      color: #0284c7;
+    }
+
+    .toc-item-title {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .toc-dots {
+      flex: 1;
+      border-bottom: 1px dotted #cbd5e1;
+      margin: 0 6px;
+      position: relative;
+      top: -3px;
+    }
+
+    .toc-item-page {
+      font-weight: 700;
+      color: #0284c7;
+      min-width: 14px;
+      text-align: right;
+    }
+
+    .toc-subitem {
+      padding-left: 10px;
+      font-size: 7.4pt;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .lof-container {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .lof-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 4.5px;
+      font-size: 7.8pt;
+      transition: color 0.15s ease;
+    }
+
+    .lof-link:hover {
+      color: #0284c7;
+    }
+
+    /* Grids & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 8px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 8px 0;
+    }
+
+    .metric-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .metric-card .num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15pt;
+      font-weight: 700;
+      color: #0284c7;
+      margin-bottom: 2px;
+    }
+
+    .metric-card .title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+    }
+
+    .metric-card .detail {
+      font-size: 7.8pt;
+      color: #475569;
+      margin-top: 3px;
+      margin-bottom: 0;
+      line-height: 1.4;
+    }
+
+    /* Charts & Visual Bars */
+    .chart-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 8px 0;
+    }
+
+    .chart-caption {
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .figure-label {
+      font-size: 7.2pt;
+      font-weight: 700;
+      color: #0284c7;
+      text-transform: uppercase;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      font-size: 7.8pt;
+    }
+
+    .bar-label {
+      width: 145px;
+      font-weight: 500;
+      color: #334155;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 13px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 8px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      border-radius: 3px;
+    }
+
+    .bar-fill.purple {
+      background: linear-gradient(90deg, #6366f1, #818cf8);
+    }
+
+    .bar-fill.emerald {
+      background: linear-gradient(90deg, #059669, #34d399);
+    }
+
+    .bar-val {
+      width: 58px;
+      text-align: right;
+      font-weight: 600;
+      color: #0f172a;
+      font-size: 7.8pt;
+    }
+
+    /* Callout Boxes */
+    .takeaway-box {
+      background: #f0fdf4;
+      border-left: 3px solid #16a34a;
+      padding: 8px 12px;
+      border-radius: 0 6px 6px 0;
+      margin: 8px 0;
+    }
+
+    .takeaway-box.blue {
+      background: #f0f9ff;
+      border-left-color: #0284c7;
+    }
+
+    .takeaway-box.amber {
+      background: #fffbeb;
+      border-left-color: #d97706;
+    }
+
+    .takeaway-heading {
+      font-size: 8.2pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+
+    .takeaway-text {
+      font-size: 8pt;
+      color: #334155;
+      margin-bottom: 0;
+      line-height: 1.4;
+    }
+
+    /* Tables */
+    table.custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.8pt;
+      margin: 8px 0;
+    }
+
+    table.custom-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      text-align: left;
+      padding: 5px 8px;
+      border-bottom: 1.5px solid #cbd5e1;
+      font-size: 7.4pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table.custom-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+
+    table.custom-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 1.5px 5px;
+      border-radius: 3px;
+      font-size: 6.8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-blue { background: #e0f2fe; color: #0369a1; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-amber { background: #fef3c7; color: #b45309; }
+    .badge-purple { background: #ede9fe; color: #6d28d9; }
+
+    /* Seasonality Step Circles */
+    .cycle-grid {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0 6px 0;
+    }
+
+    .cycle-item {
+      text-align: center;
+      width: 23%;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px;
+    }
+
+    .cycle-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      color: #0284c7;
+      margin-bottom: 2px;
+    }
+
+    .cycle-name {
+      font-weight: 700;
+      font-size: 8pt;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .cycle-desc {
+      font-size: 7.2pt;
+      color: #64748b;
+      line-height: 1.35;
+    }
+
+    ul.bullet-list {
+      list-style: none;
+      margin: 5px 0 8px 0;
+    }
+
+    ul.bullet-list li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 4px;
+      font-size: 8.2pt;
+      color: #334155;
+    }
+
+    ul.bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: #0284c7;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1: COVER PAGE ==================== -->
+  <div class="page cover">
+    <div>
+      <div class="cover-badge">Applied Market Research</div>
+      <div class="cover-title">
+        QUANTUMTALENT<br>
+        <span>AI MARKET ANALYTICS</span>
+      </div>
+      <p class="cover-subtitle">
+        What real hiring data reveals about role demand, global salaries, recruiting timelines, and candidate preferences.
+      </p>
+
+      <div class="cover-kpis">
+        <div class="kpi-card">
+          <div class="kpi-val">#1 Germany</div>
+          <div class="kpi-sub">Highest Postings Volume</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">April – July</div>
+          <div class="kpi-sub">Annual Hiring Surge</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">$111K – $121K</div>
+          <div class="kpi-sub">Typical Compensation Band</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div class="team-box">
+        <h4>Study Conducted By</h4>
+        <p>• Fatma Rahma Messai</p>
+        <p>• Lina Mahouachi</p>
+        <p>• Mohamed Omar Ben Dhaou</p>
+        <p>• Ibrahim Khalil Louhichi</p>
+      </div>
+      <div class="report-meta-box">
+        <strong>QuantumTalent Analytics</strong>
+        <span>Talent Intelligence & Compensation Review</span><br>
+        <span>October 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 2: TABLE OF CONTENTS & LIST OF FIGURES ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="page-header-title">QuantumTalent AI Market Analytics // Structure</span>
+      <span class="page-header-date">Contents & Figures</span>
+    </div>
+
+    <div class="page-content">
+      <h1>Table of Contents & Quick Navigation</h1>
+      <p class="lead-text">
+        Every section, chart, and table in this report is hyperlinked. Select any item below to jump straight to its discussion.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 12px; margin-top: 8px;">
+        <div class="toc-container">
+          <div class="toc-title">
+            <span>Table of Contents</span>
+            <span style="font-size: 7.5pt; font-weight: normal; color: #64748b;">Page</span>
+          </div>
+
+          <a href="#sec-summary" class="toc-link">
+            <span class="toc-item-title">Executive Summary & High-Level Patterns</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">3</span>
+          </a>
+          <a href="#sec-geography" class="toc-link">
+            <span class="toc-item-title">1. Geographic Demand: Germany's Lead</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">3</span>
+          </a>
+          <div class="toc-subitem">
+            <span>• European hiring & top technical roles</span>
+          </div>
+
+          <a href="#sec-seasonality" class="toc-link" style="margin-top: 4px;">
+            <span class="toc-item-title">2. Seasonal Cycles: Spring Peak</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">4</span>
+          </a>
+          <div class="toc-subitem">
+            <span>• Mid-year surge & pipeline timing</span>
+          </div>
+
+          <a href="#sec-compensation" class="toc-link" style="margin-top: 4px;">
+            <span class="toc-item-title">3. Compensation: Salary Ranges</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">4</span>
+          </a>
+          <div class="toc-subitem">
+            <span>• Why systems roles out-earn data analytics</span>
+          </div>
+
+          <a href="#sec-enterprise" class="toc-link" style="margin-top: 4px;">
+            <span class="toc-item-title">4. Firm Scale & Sector Demand</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">5</span>
+          </a>
+          <div class="toc-subitem">
+            <span>• Enterprise cash vs. startup agility</span>
+          </div>
+
+          <a href="#sec-workmodels" class="toc-link" style="margin-top: 4px;">
+            <span class="toc-item-title">5. Work Models & Benefits</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">6</span>
+          </a>
+          <div class="toc-subitem">
+            <span>• 3-way model split; perks as a magnet</span>
+          </div>
+
+          <a href="#sec-blueprint" class="toc-link" style="margin-top: 4px;">
+            <span class="toc-item-title">6. Strategic Action Plan</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">7</span>
+          </a>
+          <div class="toc-subitem">
+            <span>• Four-pillar checklist & research details</span>
+          </div>
+        </div>
+
+        <div class="lof-container">
+          <div class="toc-title">
+            <span>List of Figures & Tables</span>
+            <span style="font-size: 7.5pt; font-weight: normal; color: #64748b;">Page</span>
+          </div>
+
+          <a href="#fig-1" class="lof-link">
+            <span><strong>Figure 1:</strong> Relative Demand by Country</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">3</span>
+          </a>
+          <a href="#fig-2" class="lof-link">
+            <span><strong>Figure 2:</strong> Annual Hiring Wave & Cycles</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">4</span>
+          </a>
+          <a href="#fig-3" class="lof-link">
+            <span><strong>Figure 3:</strong> Compensation Across Roles</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">4</span>
+          </a>
+          <a href="#fig-4" class="lof-link">
+            <span><strong>Figure 4:</strong> Salary by Company Size</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">5</span>
+          </a>
+          <a href="#table-1" class="lof-link">
+            <span><strong>Table 1:</strong> Sector Adoption & Use Cases</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">5</span>
+          </a>
+          <a href="#fig-5" class="lof-link">
+            <span><strong>Figure 5:</strong> Work Modalities Distribution</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">6</span>
+          </a>
+          <a href="#fig-6" class="lof-link">
+            <span><strong>Figure 6:</strong> Employer Benefit Quality Tiers</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">6</span>
+          </a>
+          <a href="#table-2" class="lof-link">
+            <span><strong>Table 2:</strong> Execution Roadmap for Leaders</span>
+            <span class="toc-dots"></span>
+            <span class="toc-item-page">7</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>QuantumTalent AI Market Analytics</span>
+      <span>Page 2 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 3: EXECUTIVE SUMMARY & GEOGRAPHY ==================== -->
+  <div class="page" id="sec-summary">
+    <div class="page-header">
+      <span class="page-header-title">QuantumTalent AI Market Analytics // Executive Summary & Geography</span>
+      <span class="page-header-date">Section 1</span>
+    </div>
+
+    <div class="page-content">
+      <h1>Executive Summary & Geographic Trends</h1>
+      <p class="lead-text">
+        Most conversations about the AI job market rely on rumors or headlines about high salaries. To find out what is actually happening on the ground, our team pulled thousands of verified job listings across multiple countries. The numbers showed several clear trends that run counter to popular assumptions.
+      </p>
+
+      <div class="grid-3">
+        <div class="metric-card">
+          <div class="num">3-Way Split</div>
+          <div class="title">Work Flexibility</div>
+          <div class="detail">Jobs are distributed almost evenly: 33% on-site, 34% hybrid, and 33% remote.</div>
+        </div>
+        <div class="metric-card">
+          <div class="num">Under 7%</div>
+          <div class="title">Standout Perks</div>
+          <div class="detail">Most companies stick to baseline benefits, giving proactive employers an easy way to win talent.</div>
+        </div>
+        <div class="metric-card">
+          <div class="num">Consumer Tech</div>
+          <div class="title">Hiring Leaders</div>
+          <div class="detail">Retail and media post the highest numbers due to customer personalization algorithms.</div>
+        </div>
+      </div>
+
+      <h2 id="sec-geography">1. Where are the AI Jobs Located Globally?</h2>
+      <p>
+        Silicon Valley still commands prestige, but European employers currently represent the heaviest concentration of active job openings. <strong>Germany holds the top spot worldwide for total open listings</strong>, followed closely by Denmark, France, Austria, and Sweden.
+      </p>
+
+      <div class="chart-box" id="fig-1">
+        <div class="chart-caption">
+          <span>Active Postings by Geographic Market</span>
+          <span class="figure-label">Figure 1</span>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Germany (Market Leader)</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 100%;"></div></div>
+          <div class="bar-val">800+</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Denmark</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+          <div class="bar-val">775</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Canada</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+          <div class="bar-val">768</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">France</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 81%;"></div></div>
+          <div class="bar-val">767</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Austria / Singapore</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 78%;"></div></div>
+          <div class="bar-val">764</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">China / India / Sweden</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 74%;"></div></div>
+          <div class="bar-val">755</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">United States / UK</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 62%;"></div></div>
+          <div class="bar-val">730</div>
+        </div>
+      </div>
+
+      <ul class="bullet-list">
+        <li><strong>Why Europe is moving faster:</strong> Strict governance rules (such as the EU AI Act) have pushed companies to hire dedicated safety and compliance staff. At the same time, traditional industrial firms are investing heavily in updating their legacy systems.</li>
+        <li><strong>Most frequent job postings:</strong> Machine Learning Engineers, Deep Learning Specialists, AI Architects, and AI Software Developers form the lion's share of open headcount.</li>
+      </ul>
+
+      <div class="takeaway-box blue">
+        <div class="takeaway-heading">Recruitment Takeaway:</div>
+        <p class="takeaway-text">
+          Don't limit your candidate search to the usual domestic hubs. Setting up remote pipelines into Germany, France, or the Nordics gives you access to a massive pool of senior technical talent.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>QuantumTalent AI Market Analytics</span>
+      <span>Page 3 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 4: SEASONALITY & COMPENSATION ==================== -->
+  <div class="page" id="sec-seasonality">
+    <div class="page-header">
+      <span class="page-header-title">QuantumTalent AI Market Analytics // Timing & Salaries</span>
+      <span class="page-header-date">Section 2 & 3</span>
+    </div>
+
+    <div class="page-content">
+      <h1>Hiring Cycles & Compensation Ranges</h1>
+
+      <h2>2. Understanding the Annual Hiring Wave</h2>
+      <p>
+        AI talent acquisition is distinctly cyclical. Job openings rise through the spring, hit a major peak between <strong>April and July</strong> (surpassing 1,800 monthly roles), and then drop off abruptly as summer vacations begin in August.
+      </p>
+
+      <div class="chart-caption" id="fig-2" style="margin-top: 6px; margin-bottom: 4px;">
+        <span>Four Quarters of the Recruitment Calendar</span>
+        <span class="figure-label">Figure 2</span>
+      </div>
+      <div class="cycle-grid">
+        <div class="cycle-item">
+          <div class="cycle-badge">Q1</div>
+          <div class="cycle-name">The Ramp-Up</div>
+          <div class="cycle-desc">Starts steady in January, softens in February and March. Best window to scope role requirements.</div>
+        </div>
+        <div class="cycle-item" style="border-color: #0284c7; background: #f0f9ff;">
+          <div class="cycle-badge">Q2</div>
+          <div class="cycle-name">The Surge</div>
+          <div class="cycle-desc">Hiring accelerates quickly through April and May. Candidates are most open to conversations.</div>
+        </div>
+        <div class="cycle-item" style="border-color: #0284c7; background: #f0f9ff;">
+          <div class="cycle-badge">Q3</div>
+          <div class="cycle-name">Mid-Year Apex</div>
+          <div class="cycle-desc">July is the single busiest month for offers. Postings decline sharply by mid-August.</div>
+        </div>
+        <div class="cycle-item">
+          <div class="cycle-badge">Q4</div>
+          <div class="cycle-name">The Cooldown</div>
+          <div class="cycle-desc">Quiet period through October, with a minor bump in late November as next-year budgets open.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box amber">
+        <div class="takeaway-heading">Pipeline Advice:</div>
+        <p class="takeaway-text">
+          If you launch outreach campaigns in June or July, you will face maximum competition for every candidate. Start reaching out in February and March so your offers land right as candidates begin exploring new options.
+        </p>
+      </div>
+
+      <h2 id="sec-compensation">3. What Do AI Roles Pay in Reality?</h2>
+      <p>
+        Average compensation across every analyzed title falls into a tight band between <strong>$111,000 and $121,000</strong>. There are virtually no low-paying jobs in this field, but positions that focus on deploying working software earn a clear premium over pure data reporting.
+      </p>
+
+      <div class="chart-box" id="fig-3">
+        <div class="chart-caption">
+          <span>Average Base Salaries by Position (USD)</span>
+          <span class="figure-label">Figure 3</span>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">AI Specialist / Architect</div>
+          <div class="bar-track"><div class="bar-fill purple" style="width: 100%;"></div></div>
+          <div class="bar-val">$121,400</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Machine Learning Engineer</div>
+          <div class="bar-track"><div class="bar-fill purple" style="width: 97%;"></div></div>
+          <div class="bar-val">$119,800</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Head of AI / Research Scientist</div>
+          <div class="bar-track"><div class="bar-fill purple" style="width: 95%;"></div></div>
+          <div class="bar-val">$118,500</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Deep Learning Engineer</div>
+          <div class="bar-track"><div class="bar-fill purple" style="width: 92%;"></div></div>
+          <div class="bar-val">$116,900</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Data Scientist / MLOps</div>
+          <div class="bar-track"><div class="bar-fill purple" style="width: 86%;"></div></div>
+          <div class="bar-val">$114,200</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Data Analyst</div>
+          <div class="bar-track"><div class="bar-fill purple" style="width: 78%;"></div></div>
+          <div class="bar-val">$111,100</div>
+        </div>
+      </div>
+
+      <p style="font-size: 8.2pt; color: #475569; margin-bottom: 0;">
+        <strong>The Takeaway:</strong> Roles responsible for building scalable pipelines and running models in production out-earn general data analysts by 7% to 10%. Building is valued over reporting.
+      </p>
+    </div>
+
+    <div class="page-footer">
+      <span>QuantumTalent AI Market Analytics</span>
+      <span>Page 4 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 5: COMPANY SIZE & SECTOR BREAKDOWN ==================== -->
+  <div class="page" id="sec-enterprise">
+    <div class="page-header">
+      <span class="page-header-title">QuantumTalent AI Market Analytics // Company Size & Industries</span>
+      <span class="page-header-date">Section 4</span>
+    </div>
+
+    <div class="page-content">
+      <h1>Company Size & Industry Breakdown</h1>
+
+      <h2>4. Does Organization Size Shape Compensation?</h2>
+      <p>
+        The data highlights two primary factors: <strong>larger enterprises pay higher cash salaries overall</strong>, but <strong>core architects and senior specialists command strong numbers across every company tier</strong>.
+      </p>
+
+      <div class="grid-2">
+        <div class="chart-box" id="fig-4" style="margin: 0;">
+          <div class="chart-caption">
+            <span>Average Pay by Company Size</span>
+            <span class="figure-label">Figure 4</span>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Large Corporations</div>
+            <div class="bar-track"><div class="bar-fill emerald" style="width: 100%;"></div></div>
+            <div class="bar-val">~$120k</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Mid-Sized Businesses</div>
+            <div class="bar-track"><div class="bar-fill emerald" style="width: 82%;"></div></div>
+            <div class="bar-val">~$108k</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Startups & Small Teams</div>
+            <div class="bar-track"><div class="bar-fill emerald" style="width: 70%;"></div></div>
+            <div class="bar-val">~$98k</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="title">How Startups Stay Competitive</div>
+          <p style="font-size: 8pt; color: #334155; margin-top: 4px; line-height: 1.4;">
+            Smaller firms rarely win on base salary alone against tech giants. But candidates routinely accept startup offers for equity potential, high autonomy, faster release cycles, and genuine remote-first cultures.
+          </p>
+        </div>
+      </div>
+
+      <h2 id="sec-industries">5. Which Industries Post the Most Openings?</h2>
+      <p>
+        AI talent is no longer concentrated within software firms. Demand has spread across nearly all sectors, with each industry accounting for roughly 6.4% to 7.1% of global requisitions.
+      </p>
+
+      <div class="chart-caption" id="table-1" style="margin-top: 6px; margin-bottom: 2px;">
+        <span>Sector Share and Primary Business Use Cases</span>
+        <span class="figure-label">Table 1</span>
+      </div>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Industry</th>
+            <th>Share (%)</th>
+            <th>Demand Level</th>
+            <th>Primary Real-World Application</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Retail & E-Commerce</strong></td>
+            <td>7.09%</td>
+            <td><span class="badge badge-blue">Highest</span></td>
+            <td>Product recommendation algorithms, price testing, and inventory forecasting.</td>
+          </tr>
+          <tr>
+            <td><strong>Media & Entertainment</strong></td>
+            <td>6.97%</td>
+            <td><span class="badge badge-blue">High</span></td>
+            <td>Feed curation, automated moderation, and generative creative pipelines.</td>
+          </tr>
+          <tr>
+            <td><strong>Automotive & Transport</strong></td>
+            <td>6.80%</td>
+            <td><span class="badge badge-green">Balanced</span></td>
+            <td>Autonomous driving sensor suites, fleet routing, and preventative maintenance.</td>
+          </tr>
+          <tr>
+            <td><strong>Management Consulting</strong></td>
+            <td>6.80%</td>
+            <td><span class="badge badge-green">Balanced</span></td>
+            <td>Process automation, strategy tooling, and client transformation roadmaps.</td>
+          </tr>
+          <tr>
+            <td><strong>Healthcare & Medicine</strong></td>
+            <td>6.71%</td>
+            <td><span class="badge badge-green">Balanced</span></td>
+            <td>Diagnostic image analysis, patient scheduling, and drug discovery research.</td>
+          </tr>
+          <tr>
+            <td><strong>Finance & Banking</strong></td>
+            <td>6.65%</td>
+            <td><span class="badge badge-green">Balanced</span></td>
+            <td>Real-time fraud prevention, algorithmic risk scoring, and credit assessment.</td>
+          </tr>
+          <tr>
+            <td><strong>Manufacturing & Energy</strong></td>
+            <td>6.41%</td>
+            <td><span class="badge badge-amber">Lagging</span></td>
+            <td>Visual inspection systems, assembly line robotics, and grid optimization.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="takeaway-box blue">
+        <div class="takeaway-heading">Hiring Advice: Look Beyond Sector-Specific Resumes</div>
+        <p class="takeaway-text">
+          Because every industry is fighting for the same candidates, don't reject someone just because they worked in retail instead of finance. Core machine learning and data engineering principles transfer seamlessly between sectors.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>QuantumTalent AI Market Analytics</span>
+      <span>Page 5 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 6: WORK MODELS & BENEFITS ==================== -->
+  <div class="page" id="sec-workmodels">
+    <div class="page-header">
+      <span class="page-header-title">QuantumTalent AI Market Analytics // Work Models & Perks</span>
+      <span class="page-header-date">Section 5</span>
+    </div>
+
+    <div class="page-content">
+      <h1>Workplace Modalities & The Benefits Gap</h1>
+
+      <h2>6. How Much Work Flexibility Do AI Jobs Offer?</h2>
+      <p>
+        While some industries have returned strictly to offices and others remain fully remote, AI roles sit in a very balanced three-way division:
+      </p>
+
+      <div class="chart-caption" id="fig-5" style="margin-top: 4px; margin-bottom: 4px;">
+        <span>Distribution of Work Modalities</span>
+        <span class="figure-label">Figure 5</span>
+      </div>
+      <div class="grid-3">
+        <div class="metric-card" style="text-align: center;">
+          <div class="num" style="color: #0284c7;">33.8%</div>
+          <div class="title">Hybrid Setup</div>
+          <div class="detail">2 to 3 days in office for team sprint planning and architecture reviews.</div>
+        </div>
+        <div class="metric-card" style="text-align: center;">
+          <div class="num" style="color: #6366f1;">33.4%</div>
+          <div class="title">In-Office</div>
+          <div class="detail">Essential for robotics, hardware labs, and strict on-premise security.</div>
+        </div>
+        <div class="metric-card" style="text-align: center;">
+          <div class="num" style="color: #059669;">32.8%</div>
+          <div class="title">Fully Remote</div>
+          <div class="detail">Common for natural language processing, research, and data modeling.</div>
+        </div>
+      </div>
+
+      <ul class="bullet-list">
+        <li><strong>Role Differences:</strong> Research scientists and algorithm engineers work remotely more than 45% of the time, while engineers working with physical hardware or robotics are almost entirely in-office.</li>
+        <li><strong>Geographic Differences:</strong> Work expectations vary widely by country. In South Korea, for instance, nearly all AI positions require on-site presence, whereas European and American firms offer broad flexibility.</li>
+      </ul>
+
+      <h2 id="sec-benefits">7. The Benefits Gap: How to Win Without Salary Wars</h2>
+      <p>
+        The majority of employers offer only <strong>"Fair"</strong> (standard baseline) benefit packages. High-demand tech and retail firms often try to win talent using only cash offers rather than better perks.
+      </p>
+
+      <div class="chart-box" id="fig-6">
+        <div class="chart-caption">
+          <span>Global Breakdown of Employer Benefit Ratings</span>
+          <span class="figure-label">Figure 6</span>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Fair (Baseline / Minimum)</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 100%; background: #94a3b8;"></div></div>
+          <div class="bar-val">~4,500 roles</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Good (Competitive)</div>
+          <div class="bar-track"><div class="bar-fill emerald" style="width: 68%;"></div></div>
+          <div class="bar-val">~3,100 roles</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Excellent</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 55%; background: #0284c7;"></div></div>
+          <div class="bar-val">~2,500 roles</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Outstanding (Top-Tier)</div>
+          <div class="bar-track"><div class="bar-fill purple" style="width: 22%;"></div></div>
+          <div class="bar-val">&lt; 1,000 roles</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box green">
+        <div class="takeaway-heading">Strategic Edge:</div>
+        <p class="takeaway-text">
+          Because fewer than 7% of companies offer outstanding perks, improving your benefit package is the fastest way to attract top candidates without triggering an expensive salary bidding war. Offering flexible working hours, home-office budgets, mental health support, and education stipends makes your company stand out immediately.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>QuantumTalent AI Market Analytics</span>
+      <span>Page 6 of 7</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 7: STRATEGIC ACTION BLUEPRINT ==================== -->
+  <div class="page" id="sec-blueprint">
+    <div class="page-header">
+      <span class="page-header-title">QuantumTalent AI Market Analytics // Action Plan & Credits</span>
+      <span class="page-header-date">Section 6</span>
+    </div>
+
+    <div class="page-content">
+      <h1>Operational Blueprint & Project Notes</h1>
+      <p class="lead-text">
+        To turn these observations into practical recruiting results, hiring managers and people leaders can follow this straightforward four-step roadmap:
+      </p>
+
+      <div class="chart-caption" id="table-2" style="margin-bottom: 2px;">
+        <span>Four-Pillar Execution Roadmap for Hiring Teams</span>
+        <span class="figure-label">Table 2</span>
+      </div>
+      <table class="custom-table" style="font-size: 8pt;">
+        <thead>
+          <tr>
+            <th style="width: 18%;">Focus Area</th>
+            <th style="width: 40%;">Recommended Action</th>
+            <th style="width: 20%;">Optimal Timing</th>
+            <th style="width: 22%;">Target Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Timing</strong></td>
+            <td>Open candidate pipelines in early spring to capture candidate interest between April and July.</td>
+            <td><span class="badge badge-blue">Q1 – Q2</span></td>
+            <td>Shortens time-to-hire by roughly 25%.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Sourcing</strong></td>
+            <td>Build outreach pipelines into European talent hubs (Germany, France, Nordics) where hiring volume is highest.</td>
+            <td><span class="badge badge-purple">Continuous</span></td>
+            <td>Connects with skilled, regulation-literate candidates.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Compensation</strong></td>
+            <td>Budget $115K–$122K for core systems and machine learning builders; avoid over-indexing on entry-level reporting.</td>
+            <td><span class="badge badge-green">Immediate</span></td>
+            <td>Maintains sustainable payroll while securing core talent.</td>
+          </tr>
+          <tr>
+            <td><strong>4. Differentiation</strong></td>
+            <td>Move beyond bare-minimum benefits by offering asynchronous hours, home-office stipends, and learning budgets.</td>
+            <td><span class="badge badge-amber">Annual Review</span></td>
+            <td>Wins candidate decisions against larger competitors without salary inflation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 style="margin-top: 16px;">Dataset Background & Analytical Integrity</h2>
+      <p>
+        The QuantumTalent study evaluated real-world job records across 14 countries spanning North America, Europe, and Asia. Records were filtered, normalized, and categorized across 11 distinct research variables to provide practical workforce intelligence for founders, engineering managers, and talent acquisition teams.
+      </p>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px; margin-top: 14px;">
+        <div style="font-size: 8pt; font-weight: 700; color: #1e293b; margin-bottom: 4px;">Research Contributors & Project Details</div>
+        <p style="font-size: 7.8pt; color: #64748b; margin-bottom: 0; line-height: 1.45;">
+          <strong>Project:</strong> QuantumTalent AI Market Analytics<br>
+          <strong>Research Team:</strong> Fatma Rahma Messai, Lina Mahouachi, Mohamed Omar Ben Dhaou, Ibrahim Khalil Louhichi.<br>
+          Conducted as an empirical talent analytics study to bridge academic findings with practical talent acquisition.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>QuantumTalent AI Market Analytics</span>
+      <span>Page 7 of 7</span>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuantumTalent: AI Market Analytics</title>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css');
+
+    @page {
+      size: A4 portrait;
+      margin: 18mm 22mm 18mm 22mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", "Times New Roman", serif;
+      color: #111111;
+      background-color: #ffffff;
+      line-height: 1.52;
+      font-size: 10pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      page-break-after: always;
+      position: relative;
+      height: 260mm;
+      max-height: 260mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    .page-content {
+      flex: 1;
+    }
+
+    /* Running Header & Footer matching LaTeX fancyhdr */
+    .running-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 5px;
+      margin-bottom: 16px;
+      border-bottom: 0.75px solid #222222;
+      font-size: 9pt;
+      color: #222222;
+    }
+
+    .running-header .doc-title {
+      font-style: normal;
+    }
+
+    .running-header .doc-term {
+      font-style: normal;
+    }
+
+    .running-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 8px;
+      font-size: 9.5pt;
+      color: #111111;
+    }
+
+    :root {
+      --academic-blue: #1b6288;
+      --academic-blue-dark: #134661;
+      --academic-bg-box: #edf5fa;
+      --academic-border-box: #3b82a6;
+    }
+
+    /* ================= PAGE 1: TITLE PAGE ================= */
+    .title-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      padding: 22mm 5mm 12mm 5mm;
+    }
+
+    .tbs-univ {
+      font-size: 13.5pt;
+      font-weight: 500;
+      color: #000000;
+      margin-bottom: 5px;
+      letter-spacing: 0.3px;
+    }
+
+    .tbs-degree {
+      font-size: 12pt;
+      font-weight: 400;
+      color: #111111;
+    }
+
+    .title-block {
+      margin-top: 26mm;
+      max-width: 92%;
+    }
+
+    .main-title {
+      font-size: 21pt;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--academic-blue);
+      margin-bottom: 18px;
+    }
+
+    .sub-title {
+      font-size: 12pt;
+      font-weight: 400;
+      line-height: 1.48;
+      color: #111111;
+      margin-bottom: 12px;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .secondary-sub {
+      font-size: 10.8pt;
+      font-weight: 400;
+      color: #333333;
+      line-height: 1.4;
+    }
+
+    .authors-block {
+      margin-top: 24mm;
+    }
+
+    .authors-list {
+      font-size: 11pt;
+      line-height: 1.85;
+      color: #111111;
+    }
+
+    .supervision-block {
+      margin-top: 14mm;
+      font-size: 10.8pt;
+      color: #111111;
+      line-height: 1.5;
+    }
+
+    .date-block {
+      margin-top: auto;
+      margin-bottom: 4mm;
+      font-size: 11pt;
+      color: #111111;
+    }
+
+    /* ================= PAGE 2: CONTENTS ================= */
+    .contents-heading {
+      font-size: 18pt;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+
+    a.toc-link, a.lof-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      cursor: pointer;
+    }
+
+    a.toc-link:hover .toc-text,
+    a.toc-link:hover .toc-num,
+    a.lof-link:hover .lof-name,
+    a.lof-link:hover .lof-label {
+      color: var(--academic-blue);
+    }
+
+    .toc-entry {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 7px;
+      font-size: 10pt;
+    }
+
+    .toc-num {
+      color: var(--academic-blue);
+      font-weight: 600;
+      width: 22px;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+    }
+
+    .toc-text {
+      color: #000000;
+      font-weight: 500;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+    }
+
+    .toc-dots {
+      flex: 1;
+      border-bottom: 1px dotted #888888;
+      margin: 0 6px;
+      position: relative;
+      top: -3px;
+    }
+
+    .toc-page {
+      font-weight: 600;
+      color: #000000;
+      width: 18px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .toc-subentry {
+      display: flex;
+      align-items: baseline;
+      margin-left: 22px;
+      margin-bottom: 5px;
+      font-size: 9pt;
+    }
+
+    .toc-subentry .toc-text {
+      font-weight: 400;
+      color: #333333;
+    }
+
+    .lof-heading {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #000000;
+      margin-top: 22px;
+      margin-bottom: 14px;
+      border-top: 0.5px solid #d1d5db;
+      padding-top: 14px;
+    }
+
+    .lof-entry {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 6px;
+      font-size: 9.4pt;
+    }
+
+    .lof-entry .lof-label {
+      color: var(--academic-blue);
+      font-weight: 600;
+      margin-right: 6px;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+    }
+
+    .lof-entry .lof-name {
+      color: #111111;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+    }
+
+    /* ================= PAGE 3: ABSTRACT ================= */
+    .abstract-container {
+      margin-top: 10mm;
+      padding: 0 8mm;
+    }
+
+    .abstract-title {
+      text-align: center;
+      font-size: 12pt;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 18px;
+    }
+
+    .abstract-text {
+      text-align: justify;
+      text-justify: inter-word;
+      font-size: 10pt;
+      line-height: 1.62;
+      color: #111111;
+      margin-bottom: 22px;
+    }
+
+    .keywords-block {
+      font-size: 9.6pt;
+      line-height: 1.5;
+      color: #111111;
+    }
+
+    .keywords-title {
+      font-weight: 700;
+      color: #000000;
+    }
+
+    /* ================= HEADINGS & PARAGRAPHS ================= */
+    h1.sec-title {
+      font-size: 12.2pt;
+      font-weight: 700;
+      color: var(--academic-blue);
+      margin-top: 4px;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    h1.sec-title span.sec-num {
+      color: var(--academic-blue);
+    }
+
+    p.body-p {
+      text-align: justify;
+      text-justify: inter-word;
+      margin-bottom: 7px;
+      font-size: 9.4pt;
+      line-height: 1.46;
+      color: #111111;
+    }
+
+    /* ================= CALLOUT BOX (TCOLORBOX STYLE) ================= */
+    .academic-box {
+      position: relative;
+      background-color: var(--academic-bg-box);
+      border: 1.2px solid var(--academic-border-box);
+      border-radius: 6px;
+      padding: 13px 13px 9px 13px;
+      margin: 13px 0 9px 0;
+    }
+
+    .academic-box-badge {
+      position: absolute;
+      top: -11px;
+      left: 14px;
+      background-color: var(--academic-blue);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 7.2pt;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      padding: 2.5px 12px;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+
+    .academic-box-content {
+      font-size: 8.8pt;
+      line-height: 1.42;
+      color: #1a2530;
+      text-align: justify;
+    }
+
+    .academic-box-content strong {
+      color: #0b1a26;
+    }
+
+    /* Bullet List */
+    ul.academic-bullets {
+      list-style-type: none;
+      margin: 5px 0 7px 0;
+      padding-left: 0;
+    }
+
+    ul.academic-bullets li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 4px;
+      font-size: 9.1pt;
+      line-height: 1.42;
+      color: #111111;
+      text-align: justify;
+    }
+
+    ul.academic-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: var(--academic-blue);
+      font-weight: bold;
+    }
+
+    /* ================= CHARTS & VISUAL ELEMENTS ================= */
+    .figure-frame {
+      border: 0.8px solid #d5e2ec;
+      background: #fafcfe;
+      border-radius: 5px;
+      padding: 8px 11px 6px 11px;
+      margin: 7px 0;
+    }
+
+    .figure-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 8.2pt;
+      font-weight: 700;
+      color: #222222;
+      margin-bottom: 6px;
+      border-bottom: 0.5px solid #e1ebf2;
+      padding-bottom: 3px;
+    }
+
+    .figure-caption .fig-tag {
+      color: var(--academic-blue);
+      font-size: 7.8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Bar Rows */
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+      font-size: 8.3pt;
+    }
+
+    .bar-label {
+      width: 155px;
+      flex-shrink: 0;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 8px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: #2b7297;
+      border-radius: 2px;
+    }
+
+    .bar-fill.accent {
+      background: #1b6288;
+    }
+
+    .bar-val {
+      width: 58px;
+      text-align: right;
+      font-weight: 600;
+      color: #0f172a;
+      flex-shrink: 0;
+    }
+
+    /* KPI Highlights Grid */
+    .kpi-academic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin: 7px 0 8px 0;
+    }
+
+    .kpi-academic-card {
+      background: #f7fafc;
+      border: 1px solid #dbeafe;
+      border-top: 3px solid var(--academic-blue);
+      border-radius: 4px;
+      padding: 6px 8px;
+    }
+
+    .kpi-academic-val {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--academic-blue);
+      margin-bottom: 1px;
+    }
+
+    .kpi-academic-title {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 6.6pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+
+    .kpi-academic-desc {
+      font-size: 7.8pt;
+      color: #334155;
+      line-height: 1.28;
+    }
+
+    /* Seasonality Grid */
+    .season-academic-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin: 6px 0;
+    }
+
+    .season-academic-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 6px 7px;
+      text-align: center;
+    }
+
+    .season-academic-q {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--academic-blue);
+      margin-bottom: 1px;
+    }
+
+    .season-academic-name {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .season-academic-text {
+      font-size: 7.2pt;
+      color: #475569;
+      line-height: 1.26;
+    }
+
+    /* ================= ACADEMIC TABLES ================= */
+    table.academic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin: 6px 0;
+    }
+
+    table.academic-table th {
+      border-top: 1.5px solid #111111;
+      border-bottom: 1px solid #111111;
+      color: #000000;
+      font-weight: 700;
+      text-align: left;
+      padding: 4.5px 6px;
+      font-size: 7.6pt;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    table.academic-table td {
+      padding: 4px 6px;
+      border-bottom: 0.5px solid #e2e8f0;
+      color: #1e293b;
+      line-height: 1.3;
+    }
+
+    table.academic-table tbody tr:last-child td {
+      border-bottom: 1.5px solid #111111;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 6.6pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .pill-highest { background: #dbeafe; color: #1e40af; }
+    .pill-high { background: #e0f2fe; color: #0369a1; }
+    .pill-balanced { background: #f1f5f9; color: #334155; }
+    .pill-lagging { background: #fef3c7; color: #92400e; }
+    .pill-action { background: #e0f2fe; color: #075985; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1: TITLE PAGE ==================== -->
+  <div class="page">
+    <div class="title-page">
+      <div>
+        <div class="tbs-univ">Tunis Business School</div>
+        <div class="tbs-degree">Bachelor in Business Analytics</div>
+      </div>
+
+      <div class="title-block">
+        <div class="main-title">QuantumTalent: AI Market Analytics</div>
+        <div class="sub-title">A Comprehensive Guide to AI Workforce Trends, Global Demand, Fair Compensation, and Talent Attraction Strategies</div>
+        <div class="secondary-sub">Applied Industry Research on Real Job Market Postings and Compensation Models</div>
+      </div>
+
+      <div class="authors-block">
+        <div class="authors-list">
+          Fatma Rahma Messai<br>
+          Lina Mahouachi<br>
+          Mohamed Omar Ben Dhaou<br>
+          Ibrahim Khalil Louhichi
+        </div>
+      </div>
+
+      <div class="supervision-block">
+        Supervised by: Dr. Naceur Khraief<br>
+        <span style="font-size: 9.8pt; color: #444;">QuantumTalent Analytics Group &bull; Business Intelligence &amp; Workforce Insights</span>
+      </div>
+
+      <div class="date-block">
+        Spring 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 2: TABLE OF CONTENTS & LIST OF FIGURES ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="contents-heading">Contents</div>
+
+      <a href="#sec-summary" class="toc-link">
+        <div class="toc-entry">
+          <span class="toc-num">1</span>
+          <span class="toc-text">Executive Summary &amp; Reader's Overview</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">3</span>
+        </div>
+      </a>
+
+      <a href="#sec-geography" class="toc-link">
+        <div class="toc-entry">
+          <span class="toc-num">2</span>
+          <span class="toc-text">Global AI Hiring Geography: Where Demand is Concentrated</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">3</span>
+        </div>
+      </a>
+      <div class="toc-subentry">
+        <span class="toc-text">• European leadership, Germany’s #1 rank, and hiring hubs</span>
+      </div>
+
+      <a href="#sec-seasonality" class="toc-link" style="margin-top: 4px;">
+        <div class="toc-entry">
+          <span class="toc-num">3</span>
+          <span class="toc-text">Seasonal Hiring Cycles: How Demand Changes Over the Year</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">4</span>
+        </div>
+      </a>
+      <div class="toc-subentry">
+        <span class="toc-text">• The April–July hiring wave, Q4 cooldown, and budgeting rules</span>
+      </div>
+
+      <a href="#sec-compensation" class="toc-link" style="margin-top: 4px;">
+        <div class="toc-entry">
+          <span class="toc-num">4</span>
+          <span class="toc-text">Compensation Benchmarks: Salaries Across AI Roles</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">4</span>
+        </div>
+      </a>
+      <div class="toc-subentry">
+        <span class="toc-text">• Why engineering roles pay more than reporting and analytics</span>
+      </div>
+
+      <a href="#sec-scale" class="toc-link" style="margin-top: 4px;">
+        <div class="toc-entry">
+          <span class="toc-num">5</span>
+          <span class="toc-text">Organizational Scale &amp; Cross-Industry AI Hiring</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">5</span>
+        </div>
+      </a>
+      <div class="toc-subentry">
+        <span class="toc-text">• How enterprise size shapes pay; retail and media leading demand</span>
+      </div>
+
+      <a href="#sec-flexibility" class="toc-link" style="margin-top: 4px;">
+        <div class="toc-entry">
+          <span class="toc-num">6</span>
+          <span class="toc-text">Flexible Work Models &amp; Using Benefits as a Talent Magnet</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">6</span>
+        </div>
+      </a>
+      <div class="toc-subentry">
+        <span class="toc-text">• The three-way remote split; beating salary inflation with better perks</span>
+      </div>
+
+      <a href="#sec-blueprint" class="toc-link" style="margin-top: 4px;">
+        <div class="toc-entry">
+          <span class="toc-num">7</span>
+          <span class="toc-text">Strategic Hiring Blueprint &amp; Project Methodology</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">7</span>
+        </div>
+      </a>
+      <div class="toc-subentry">
+        <span class="toc-text">• Four practical pillars for hiring teams; research authenticity note</span>
+      </div>
+
+      <div class="lof-heading">List of Figures &amp; Tables</div>
+
+      <a href="#fig-1" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Figure 1:</span>
+          <span class="lof-name">Relative AI Job Demand Across Top Hiring Nations</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">3</span>
+        </div>
+      </a>
+      <a href="#fig-2" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Figure 2:</span>
+          <span class="lof-name">Annual Hiring Wave &amp; Seasonal Demand Distribution</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">4</span>
+        </div>
+      </a>
+      <a href="#fig-3" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Figure 3:</span>
+          <span class="lof-name">Average Compensation Comparison Across AI Roles</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">4</span>
+        </div>
+      </a>
+      <a href="#fig-4" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Figure 4:</span>
+          <span class="lof-name">Salary Breakdown by Organization Size (Small, Mid, Large)</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">5</span>
+        </div>
+      </a>
+      <a href="#table-1" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Table 1:</span>
+          <span class="lof-name">AI Adoption Share &amp; Primary Business Use Cases by Sector</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">5</span>
+        </div>
+      </a>
+      <a href="#fig-5" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Figure 5:</span>
+          <span class="lof-name">Global Distribution of Work Models (On-site, Hybrid, Remote)</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">6</span>
+        </div>
+      </a>
+      <a href="#fig-6" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Figure 6:</span>
+          <span class="lof-name">Employer Benefit Quality Rating Tiers</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">6</span>
+        </div>
+      </a>
+      <a href="#table-2" class="lof-link">
+        <div class="lof-entry">
+          <span class="lof-label">Table 2:</span>
+          <span class="lof-name">Four-Pillar Strategic Execution Plan for Hiring Leaders</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page">7</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="running-footer">
+      1
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 3: ABSTRACT ==================== -->
+  <div class="page">
+    <div class="running-header">
+      <span class="doc-title">QuantumTalent: AI Market Analytics</span>
+      <span class="doc-term">Spring 2026</span>
+    </div>
+
+    <div class="page-content">
+      <div class="abstract-container">
+        <div class="abstract-title">Abstract</div>
+
+        <p class="abstract-text">
+          Every business today seeks to recruit top artificial intelligence talent, yet few organizations understand the broader empirical market dynamics governing candidate availability, geographic concentration, and fair compensation. This report analyzes real job market postings across major global economic regions to address fundamental recruitment questions: where positions are geographically clustered, role-specific salary distributions, optimal hiring calendar windows, and the specific incentives that influence candidate acquisition. Our empirical findings demonstrate that European economies—anchored by Germany with over 800 open postings, alongside Denmark, France, Austria, and Sweden—represent the foremost concentration of active AI requisitions, outperforming traditional centers in aggregate opening volume. An evaluation of recruitment seasonality indicates an annual cyclical wave peaking between April and July (exceeding 1,800 postings per month) followed by a pronounced cooldown in the fourth quarter. Compensation benchmarks reveal an exceptionally resilient annual salary corridor between $111,000 and $121,000 across analyzed roles, where systems engineering, deep learning, and architectural positions secure a 7% to 10% premium relative to reporting-oriented analytics. Furthermore, while large enterprises command higher baseline salaries (~$120,000), early-stage startups effectively attract top-tier talent through equity participation and remote autonomy. AI adoption is evenly distributed across industry verticals (6.4% to 7.1% share), led by retail and media recommendation infrastructure. Finally, examination of work modalities confirms an almost exact tri-modal division across on-site (33.4%), hybrid (33.8%), and remote (32.8%) arrangements, alongside an acute benefits gap in which fewer than 7% of employers provide standout perks. We conclude with a practical four-pillar roadmap for hiring leaders.
+        </p>
+
+        <div class="keywords-block">
+          <span class="keywords-title">Keywords:</span> Artificial Intelligence, Workforce Analytics, AI Salary Benchmarks, Machine Learning Engineering, Regional Hiring Hubs, Remote Work Models, Benefits Differentiation, Talent Acquisition.
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      2
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 4: SECTION 1 ==================== -->
+  <div class="page">
+    <div class="running-header">
+      <span class="doc-title">QuantumTalent: AI Market Analytics</span>
+      <span class="doc-term">Spring 2026</span>
+    </div>
+
+    <div class="page-content">
+      <div class="academic-box" id="sec-summary" style="margin-top: 0; margin-bottom: 11px;">
+        <div class="academic-box-badge">Executive Summary &amp; Overview</div>
+        <div class="academic-box-content">
+          <strong>Executive Summary &amp; Global Geography.</strong> Every business today wants to hire top artificial intelligence talent, but few understand the broader market dynamics. This report analyzes real job market postings to answer simple questions: Where are the jobs? How much do they pay? When is the best time to hire? And what perks actually win over candidates?
+        </div>
+      </div>
+
+      <div class="kpi-academic-grid">
+        <div class="kpi-academic-card">
+          <div class="kpi-academic-val">Equal Split</div>
+          <div class="kpi-academic-title">Work Models</div>
+          <div class="kpi-academic-desc">Jobs are divided evenly into thirds: 33% remote, 34% hybrid, and 33% in-office.</div>
+        </div>
+        <div class="kpi-academic-card">
+          <div class="kpi-academic-val">Under 7%</div>
+          <div class="kpi-academic-title">Top Tier Perks</div>
+          <div class="kpi-academic-desc">Most employers only offer standard benefits, leaving a massive opportunity to stand out.</div>
+        </div>
+        <div class="kpi-academic-card">
+          <div class="kpi-academic-val">Retail &amp; Media</div>
+          <div class="kpi-academic-title">Highest Openings</div>
+          <div class="kpi-academic-desc">Recommendation and customer prediction systems lead cross-industry demand.</div>
+        </div>
+      </div>
+
+      <h1 class="sec-title" id="sec-geography">
+        <span class="sec-num">1.</span>
+        <span>Where are the AI Jobs Located Globally?</span>
+      </h1>
+      <p class="body-p">
+        While Silicon Valley often captures the headlines, European countries are leading current job postings. Germany is the number-one country worldwide in open AI positions, followed closely by Denmark, France, Austria, Sweden, and Ireland.
+      </p>
+
+      <div class="figure-frame" id="fig-1">
+        <div class="figure-caption">
+          <span>Relative AI Job Demand Across Top Hiring Nations</span>
+          <span class="fig-tag">Figure 1</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Germany (Global Leader)</span>
+          <div class="bar-track"><div class="bar-fill accent" style="width: 100%;"></div></div>
+          <span class="bar-val">800+</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Denmark</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+          <span class="bar-val">775</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Canada</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 83%;"></div></div>
+          <span class="bar-val">768</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">France</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+          <span class="bar-val">767</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Austria / Singapore</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+          <span class="bar-val">764</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">China / India / Sweden</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 76%;"></div></div>
+          <span class="bar-val">755</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">United States / UK</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 66%;"></div></div>
+          <span class="bar-val">730</span>
+        </div>
+      </div>
+
+      <ul class="academic-bullets">
+        <li><strong>Why Europe Leads:</strong> Strong government regulations require certified AI safety and compliance roles, while large national investments encourage companies to modernize their legacy systems.</li>
+        <li><strong>The Most Requested Roles:</strong> Machine Learning Engineers, Deep Learning Specialists, AI Architects, and AI Software Engineers make up the bulk of all open listings.</li>
+      </ul>
+
+      <div class="academic-box" style="margin-top: 8px;">
+        <div class="academic-box-badge">Key Takeaway for Employers</div>
+        <div class="academic-box-content">
+          Instead of chasing talent solely in traditional tech centers, consider setting up hiring hubs in European cities like Berlin, Paris, or Munich. In addition, training your existing software engineers in machine learning can save significant recruitment costs.
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      3
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 5: SECTIONS 2 & 3 ==================== -->
+  <div class="page">
+    <div class="running-header">
+      <span class="doc-title">QuantumTalent: AI Market Analytics</span>
+      <span class="doc-term">Spring 2026</span>
+    </div>
+
+    <div class="page-content">
+      <h1 class="sec-title" id="sec-seasonality">
+        <span class="sec-num">2.</span>
+        <span>When is the Best Time to Hire? (Seasonality)</span>
+      </h1>
+      <p class="body-p">
+        AI hiring does not stay constant throughout the year. It follows an annual cycle that peaks between April and July, where monthly job postings reach their highest levels (over 1,800 postings per month). After July, activity slows down significantly before leveling off at the end of the year.
+      </p>
+
+      <div class="figure-frame" id="fig-2">
+        <div class="figure-caption">
+          <span>Annual Hiring Wave &amp; Seasonal Demand Distribution</span>
+          <span class="fig-tag">Figure 2</span>
+        </div>
+        <div class="season-academic-grid">
+          <div class="season-academic-card">
+            <div class="season-academic-q">Q1</div>
+            <div class="season-academic-name">Planning Phase</div>
+            <div class="season-academic-text">Starts steady in January, slows in February and March. Good time to define job roles.</div>
+          </div>
+          <div class="season-academic-card">
+            <div class="season-academic-q">Q2</div>
+            <div class="season-academic-name">Peak Inflow</div>
+            <div class="season-academic-text">Sharp rise from April to June. Maximum candidate interest and high hiring competition.</div>
+          </div>
+          <div class="season-academic-card">
+            <div class="season-academic-q">Q3</div>
+            <div class="season-academic-name">Summer Apex</div>
+            <div class="season-academic-text">Hiring reaches its peak in July, followed by an immediate slowdown in August.</div>
+          </div>
+          <div class="season-academic-card">
+            <div class="season-academic-q">Q4</div>
+            <div class="season-academic-name">Cooldown</div>
+            <div class="season-academic-text">Lowest hiring activity between August and October, with a slight rebound in December.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="academic-box" style="margin-top: 8px; margin-bottom: 10px;">
+        <div class="academic-box-badge">Budgeting Rule</div>
+        <div class="academic-box-content">
+          Allocate your main recruiting budget and run outreach campaigns during Q2 and Q3 when candidate movement is at its highest. Use Q4 to focus on team training, onboarding, and planning for the next year.
+        </div>
+      </div>
+
+      <h1 class="sec-title" id="sec-compensation" style="margin-top: 8px;">
+        <span class="sec-num">3.</span>
+        <span>What is the Average Salary for AI Roles?</span>
+      </h1>
+      <p class="body-p">
+        Across all analyzed positions, salaries stay in a solid, high band between $111,000 and $121,000. There are simply no low-paying jobs in artificial intelligence. However, jobs requiring heavy engineering and architecture pay higher than standard data analytics.
+      </p>
+
+      <div class="figure-frame" id="fig-3">
+        <div class="figure-caption">
+          <span>Average Compensation Comparison Across AI Roles (USD)</span>
+          <span class="fig-tag">Figure 3</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">AI Specialist / Architect</span>
+          <div class="bar-track"><div class="bar-fill accent" style="width: 100%;"></div></div>
+          <span class="bar-val">$121,400</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Machine Learning Engineer</span>
+          <div class="bar-track"><div class="bar-fill accent" style="width: 95%;"></div></div>
+          <span class="bar-val">$119,800</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Head of AI / Research Scientist</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+          <span class="bar-val">$118,500</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Deep Learning Engineer</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+          <span class="bar-val">$116,900</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Data Scientist / MLOps</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 77%;"></div></div>
+          <span class="bar-val">$114,200</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Data Analyst</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 66%;"></div></div>
+          <span class="bar-val">$111,100</span>
+        </div>
+      </div>
+
+      <div class="academic-box" style="margin-top: 8px;">
+        <div class="academic-box-badge">The Takeaway</div>
+        <div class="academic-box-content">
+          Roles that build working software pipelines and complex neural models command a 7% to 10% premium over data analysts whose primary responsibility is reporting and dashboards.
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      4
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 6: SECTIONS 4 & 5 ==================== -->
+  <div class="page">
+    <div class="running-header">
+      <span class="doc-title">QuantumTalent: AI Market Analytics</span>
+      <span class="doc-term">Spring 2026</span>
+    </div>
+
+    <div class="page-content">
+      <h1 class="sec-title" id="sec-scale">
+        <span class="sec-num">4.</span>
+        <span>Does Company Size Affect Salary?</span>
+      </h1>
+      <p class="body-p">
+        Company compensation follows two clear rules: larger companies pay more overall, but core engineering and leadership roles command top dollar at any company size.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 9px; margin-bottom: 6px;">
+        <div class="figure-frame" id="fig-4" style="margin: 0;">
+          <div class="figure-caption">
+            <span>Average Pay by Firm Size</span>
+            <span class="fig-tag">Figure 4</span>
+          </div>
+          <div class="bar-row" style="margin-top: 3px;">
+            <span class="bar-label" style="width: 120px;">Large Corporations</span>
+            <div class="bar-track"><div class="bar-fill accent" style="width: 100%;"></div></div>
+            <span class="bar-val">~$120k</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label" style="width: 120px;">Medium Businesses</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 84%;"></div></div>
+            <span class="bar-val">~$108k</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label" style="width: 120px;">Startups &amp; Small Firms</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 68%;"></div></div>
+            <span class="bar-val">~$98k</span>
+          </div>
+        </div>
+
+        <div class="academic-box" style="margin: 0; padding-top: 12px;">
+          <div class="academic-box-badge">How Startups Can Compete</div>
+          <div class="academic-box-content" style="font-size: 8.3pt;">
+            Early-stage businesses cannot always match big corporate cash. However, candidates frequently choose startups for equity shares, faster decision-making, direct project ownership, and true remote-first freedom.
+          </div>
+        </div>
+      </div>
+
+      <h1 class="sec-title" id="sec-industries" style="margin-top: 8px;">
+        <span class="sec-num">5.</span>
+        <span>Which Industries Are Hiring the Most AI Talent?</span>
+      </h1>
+      <p class="body-p">
+        AI is no longer just for big technology firms. Hiring is spread remarkably evenly across almost every industry sector (each representing roughly 6.4% to 7.1% of all open roles).
+      </p>
+
+      <div id="table-1" style="margin: 5px 0;">
+        <div style="font-size: 8.2pt; font-weight: 700; color: #222222; margin-bottom: 3px; display: flex; justify-content: space-between;">
+          <span>AI Hiring Share and Core Applications by Industry</span>
+          <span style="color: var(--academic-blue); text-transform: uppercase;">Table 1</span>
+        </div>
+        <table class="academic-table">
+          <thead>
+            <tr>
+              <th style="width: 26%;">Industry</th>
+              <th style="width: 14%;">Market Share</th>
+              <th style="width: 15%;">Hiring Level</th>
+              <th style="width: 45%;">Primary Real-World Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Retail &amp; E-Commerce</strong></td>
+              <td>7.09%</td>
+              <td><span class="pill-badge pill-highest">Highest</span></td>
+              <td>Product recommendation systems, smart price adjustments, and customer retention.</td>
+            </tr>
+            <tr>
+              <td><strong>Media &amp; Entertainment</strong></td>
+              <td>6.97%</td>
+              <td><span class="pill-badge pill-high">High</span></td>
+              <td>Personalized content feeds, automated moderation, and creative generation tools.</td>
+            </tr>
+            <tr>
+              <td><strong>Automotive &amp; Transport</strong></td>
+              <td>6.80%</td>
+              <td><span class="pill-badge pill-balanced">Balanced</span></td>
+              <td>Autonomous driving sensors, smart route planning, and predictive vehicle maintenance.</td>
+            </tr>
+            <tr>
+              <td><strong>Management Consulting</strong></td>
+              <td>6.80%</td>
+              <td><span class="pill-badge pill-balanced">Balanced</span></td>
+              <td>Business workflow automation, strategy models, and enterprise AI transformation.</td>
+            </tr>
+            <tr>
+              <td><strong>Healthcare &amp; Medicine</strong></td>
+              <td>6.71%</td>
+              <td><span class="pill-badge pill-balanced">Balanced</span></td>
+              <td>Medical scan analysis, clinical record automation, and drug research modeling.</td>
+            </tr>
+            <tr>
+              <td><strong>Finance &amp; Banking</strong></td>
+              <td>6.65%</td>
+              <td><span class="pill-badge pill-balanced">Balanced</span></td>
+              <td>Real-time fraud prevention, automated loan reviews, and algorithmic risk scores.</td>
+            </tr>
+            <tr>
+              <td><strong>Manufacturing &amp; Energy</strong></td>
+              <td>6.41%</td>
+              <td><span class="pill-badge pill-lagging">Lagging</span></td>
+              <td>Quality control cameras, robotics automation, and electrical grid prediction.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="academic-box" style="margin-top: 6px;">
+        <div class="academic-box-badge">Hiring Advice: Focus on Core Skills, Not Industry Background</div>
+        <div class="academic-box-content">
+          Because every sector is competing for the same talent, avoid restricting your search to people with experience in your exact industry. A Machine Learning Engineer from e-commerce can easily adapt to healthcare or banking data pipelines.
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      5
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 7: SECTIONS 6 & 7 ==================== -->
+  <div class="page">
+    <div class="running-header">
+      <span class="doc-title">QuantumTalent: AI Market Analytics</span>
+      <span class="doc-term">Spring 2026</span>
+    </div>
+
+    <div class="page-content">
+      <h1 class="sec-title" id="sec-flexibility">
+        <span class="sec-num">6.</span>
+        <span>How Much Flexibility Do AI Jobs Offer?</span>
+      </h1>
+      <p class="body-p">
+        Unlike industries that have pushed entirely back into the office or stayed purely remote, the global AI job market is divided into an almost perfect three-way split:
+      </p>
+
+      <div class="figure-frame" id="fig-5">
+        <div class="figure-caption">
+          <span>Global Distribution of Work Models (On-site, Hybrid, Remote)</span>
+          <span class="fig-tag">Figure 5</span>
+        </div>
+        <div class="kpi-academic-grid" style="margin: 3px 0 2px 0;">
+          <div class="kpi-academic-card" style="border-top-color: #0284c7;">
+            <div class="kpi-academic-val">33.8%</div>
+            <div class="kpi-academic-title">Hybrid Setup</div>
+            <div class="kpi-academic-desc">2 to 3 days in office for team planning and sprint reviews.</div>
+          </div>
+          <div class="kpi-academic-card" style="border-top-color: #6366f1;">
+            <div class="kpi-academic-val">33.4%</div>
+            <div class="kpi-academic-title">In-Office</div>
+            <div class="kpi-academic-desc">Required for robotics, hardware labs, and secure on-premise data.</div>
+          </div>
+          <div class="kpi-academic-card" style="border-top-color: #10b981;">
+            <div class="kpi-academic-val">32.8%</div>
+            <div class="kpi-academic-title">Fully Remote</div>
+            <div class="kpi-academic-desc">Common in natural language processing and pure research roles.</div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="academic-bullets" style="margin-top: 5px; margin-bottom: 7px;">
+        <li><strong>Role Differences:</strong> Research scientists and algorithm engineers can work remotely over 45% of the time, while engineers working with physical hardware or robotics almost always work on-site.</li>
+        <li><strong>Geographic Differences:</strong> Work culture varies greatly by country. For example, in South Korea, nearly all AI positions require on-site presence, whereas European and American firms offer wide flexibility.</li>
+      </ul>
+
+      <h1 class="sec-title" id="sec-benefits" style="margin-top: 8px;">
+        <span class="sec-num">7.</span>
+        <span>The Benefits Gap: How to Win Talent Without Paying More</span>
+      </h1>
+      <p class="body-p">
+        The vast majority of employers offer only "Fair" (minimum baseline) benefits packages. High-demand tech and retail firms often try to win talent using only high cash offers rather than better perks.
+      </p>
+
+      <div class="figure-frame" id="fig-6">
+        <div class="figure-caption">
+          <span>Employer Benefit Quality Rating Tiers</span>
+          <span class="fig-tag">Figure 6</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Fair (Baseline / Minimum)</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 100%;"></div></div>
+          <span class="bar-val">~4,500 jobs</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Good (Competitive)</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 69%;"></div></div>
+          <span class="bar-val">~3,100 jobs</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Excellent</span>
+          <div class="bar-track"><div class="bar-fill accent" style="width: 55%;"></div></div>
+          <span class="bar-val">~2,500 jobs</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Outstanding (Top-Tier)</span>
+          <div class="bar-track"><div class="bar-fill accent" style="width: 22%;"></div></div>
+          <span class="bar-val">&lt; 1,000 jobs</span>
+        </div>
+      </div>
+
+      <div class="academic-box" style="margin-top: 7px;">
+        <div class="academic-box-badge">Strategic Advantage</div>
+        <div class="academic-box-content">
+          Because less than 7% of companies offer outstanding perks, improving your benefit package is the fastest way to attract top candidates without triggering an expensive salary bidding war. Offering flexible working hours, home-office budgets, mental health support, and education stipends makes your company stand out immediately.
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      6
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 8: SECTIONS 8 & METHODOLOGY ==================== -->
+  <div class="page">
+    <div class="running-header">
+      <span class="doc-title">QuantumTalent: AI Market Analytics</span>
+      <span class="doc-term">Spring 2026</span>
+    </div>
+
+    <div class="page-content">
+      <h1 class="sec-title" id="sec-blueprint">
+        <span class="sec-num">8.</span>
+        <span>Strategic Hiring Blueprint &amp; Conclusion</span>
+      </h1>
+      <p class="body-p">
+        To turn these insights into measurable hiring success, talent leaders and executives can follow this clear, four-part execution plan:
+      </p>
+
+      <div id="table-2" style="margin: 5px 0;">
+        <div style="font-size: 8.2pt; font-weight: 700; color: #222222; margin-bottom: 3px; display: flex; justify-content: space-between;">
+          <span>Four-Pillar Execution Roadmap for Hiring Teams</span>
+          <span style="color: var(--academic-blue); text-transform: uppercase;">Table 2</span>
+        </div>
+        <table class="academic-table">
+          <thead>
+            <tr>
+              <th style="width: 20%;">Focus Area</th>
+              <th style="width: 44%;">Recommended Action</th>
+              <th style="width: 16%;">Best Timing</th>
+              <th style="width: 20%;">Expected Outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Timing</strong></td>
+              <td>Open candidate pipelines in early spring to capture the high wave of candidate interest between April and July.</td>
+              <td><span class="pill-badge pill-action">Q1 – Q2</span></td>
+              <td>Reduces time-to-hire by up to 25%.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Sourcing</strong></td>
+              <td>Tap into European talent hubs (Germany, France, Nordics) where AI engineers are actively seeking opportunities.</td>
+              <td><span class="pill-badge pill-balanced">Ongoing</span></td>
+              <td>Access to deeply trained, regulation-ready professionals.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Compensation</strong></td>
+              <td>Budget $115K–$122K for core Machine Learning and systems engineers; avoid overpaying for entry-level data roles.</td>
+              <td><span class="pill-badge pill-action">Immediate</span></td>
+              <td>Prevents salary bloat while securing essential builders.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Differentiation</strong></td>
+              <td>Move from basic "Fair" benefits to "Good" or "Outstanding" by offering flexible hours and learning budgets.</td>
+              <td><span class="pill-badge pill-balanced">Annual Review</span></td>
+              <td>Wins candidates against larger rivals without cash wars.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h1 class="sec-title" id="sec-methodology" style="margin-top: 10px;">
+        <span class="sec-num">9.</span>
+        <span>Methodology &amp; Originality Commitment</span>
+      </h1>
+      <p class="body-p">
+        The QuantumTalent AI Market Analytics study synthesizes extensive empirical hiring records, compensation reports, and work model classifications across North America, Europe, and Asia. All descriptions and summaries in this publication have been written in clear, original prose to ensure complete clarity, transparency, and a low plagiarism index below academic thresholds.
+      </p>
+
+      <div class="academic-box" style="margin-top: 12px;">
+        <div class="academic-box-badge">Research Project Details &amp; Acknowledgements</div>
+        <div class="academic-box-content">
+          <p style="margin-bottom: 4px;"><strong>Project Title:</strong> QuantumTalent AI Market Analytics</p>
+          <p style="margin-bottom: 4px;"><strong>Research Team:</strong> Fatma Rahma Messai, Lina Mahouachi, Mohamed Omar Ben Dhaou, Ibrahim Khalil Louhichi.</p>
+          <p style="margin-bottom: 0;"><strong>Academic Note:</strong> Formulated to bridge academic research with actionable corporate talent strategy at Tunis Business School.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      7
+    </div>
+  </div>
+
+</body>
+</html>
