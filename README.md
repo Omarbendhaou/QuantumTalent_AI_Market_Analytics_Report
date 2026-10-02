@@ -14,7 +14,7 @@
 - **Mohamed Omar Ben Dhaou**
 - **Ibrahim Khalil Louhichi**
 
-*Academic Supervision:* **Dr. Naceur Khraief**  
+*Academic Supervision:* **Dr. Ameni Azzouz**  
 *Research Affiliation:* **QuantumTalent Analytics Group &bull; Business Intelligence & Workforce Insights**
 
 ---
